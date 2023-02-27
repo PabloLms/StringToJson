@@ -1,6 +1,7 @@
 package org.plms.StringToJson.utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.plms.StringToJson.tree.NodeReference;
 
@@ -36,4 +37,10 @@ public class Constants {
   public static final String REGEX_FIELD_ARRAY = "([a-z]|[A-Z]){1,}\\=\\[(\\w|\\s|\\,|\\-|\\$){0,}\\]";
 
   public static final Map<String, NodeReference> ENCRYPTED_MAP = new HashMap<>();
+
+  public static final List<Command> commands = List.of(
+      new Command(List.of("-Object", "path"), TypeCommand.OBJECT_NULL),
+      new Command(List.of("-Array", "path"), TypeCommand.ARRAY_NULL),
+      new Command(List.of("-Object", "-notNull", "path"), TypeCommand.OBJECT_NOT_NULL),
+      new Command(List.of("-Array", "-notNull", "path"), TypeCommand.ARRAY_NOT_NULL));
 }

@@ -1,8 +1,14 @@
 package org.plms.StringToJson.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CustomException extends Exception {
 
-  public CustomException(final String message) {
+  private Object object;
+
+  public CustomException(final String message, final Object object) {
     super(message);
+    this.object = object;
   }
 }

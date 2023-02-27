@@ -2,6 +2,7 @@ package org.plms.StringToJson.utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -96,7 +97,16 @@ public class StringToJsonUtils {
     return Arrays.stream(StringUtils.split(
             StringUtils.substring(group, StringUtils.indexOf(group, charStart) + 1,
                 StringUtils.lastIndexOf(group, charEnd)), ","))
-        .map(element -> StringUtils.stripStart(element, null)).collect(
-            Collectors.toList());
+        .map(element -> StringUtils.stripStart(element, null)).collect(Collectors.toList());
+  }
+
+  public static Optional<TypeCommand> searchCommand(final String[] args) {
+    List<Command> commands = Constants.commands.stream()
+        .filter(command -> command.getParameters().size() == args.length)
+        .collect(Collectors.toList());
+    return commands.stream().filter(command -> String.join(" ",
+                command.getParameters().subList(0, command.getParameters().size() - 1))
+            .equals(String.join(" ", Arrays.asList(args).subList(0, args.length - 1)))).findFirst()
+        .map(Command::getTypeCommand);
   }
 }
