@@ -82,7 +82,9 @@ public class App {
               JsonElement jsonElement = JsonParser.parseString(object.toString());
               try (FileWriter fileWriter = new FileWriter(file, true)) {
                 fileWriter.append(gson.toJson(jsonElement));
+                System.out.println("Creado con exito");
               } catch (Exception e) {
+                System.out.println("Ocurrió un error creando el archivo json");
                 e.printStackTrace();
               }
             }
